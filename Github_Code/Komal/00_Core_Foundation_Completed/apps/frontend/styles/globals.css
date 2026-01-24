@@ -1,0 +1,562 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;500;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background-color: #050308;
+    color: #f9fafb; /* softer white for better readability */
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', serif;
+  }
+
+  input::placeholder {
+    color: #a0a0a0;
+    opacity: 1;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Ensure number inputs display text properly */
+  input[type="number"] {
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    appearance: textfield;
+    color: #111827 !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    font-weight: normal !important;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Ensure text is visible in input fields */
+  input[type="number"]:focus {
+    color: #111827 !important;
+    outline: none;
+  }
+
+  /* White background inputs should have dark text */
+  .bg-white input[type="number"],
+  .bg-white input[type="text"] {
+    color: #111827 !important;
+    background-color: #ffffff !important;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-card {
+    /* neutral dark card with subtle wine tint */
+    background: radial-gradient(circle at top left, rgba(32, 31, 45, 0.98), rgba(8, 8, 16, 0.98));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.8),
+      0 0 0 1px rgba(255, 255, 255, 0.03);
+  }
+
+  .gradient-bg {
+    /* simpler, more neutral hero background */
+    background:
+      radial-gradient(circle at top left, #111827 0%, transparent 55%),
+      radial-gradient(circle at bottom right, #020617 0%, transparent 55%),
+      #020617;
+  }
+
+  .wine-gradient {
+    background: linear-gradient(135deg, rgba(88, 17, 26, 0.1) 0%, rgba(128, 0, 32, 0.1) 100%);
+  }
+
+  .gold-gradient {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .text-shadow-gold {
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+  }
+
+  /* Smooth floating animation for bottles */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(var(--rotate-start, 0deg));
+    }
+    50% {
+      transform: translateY(-20px) rotate(var(--rotate-end, 0deg));
+    }
+  }
+
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px) rotate(var(--rotate-start, 0deg));
+    }
+    33% {
+      transform: translateY(-15px) translateX(5px) rotate(calc(var(--rotate-start, 0deg) + 2deg));
+    }
+    66% {
+      transform: translateY(-25px) translateX(-5px) rotate(calc(var(--rotate-start, 0deg) - 2deg));
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-float {
+    animation: float-slow 8s ease-in-out infinite;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.6s ease-out forwards;
+  }
+
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 8px rgba(212, 175, 55, 0);
+    }
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+
+  @keyframes fade-in-scale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.6s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  .animate-fade-in-scale {
+    animation: fade-in-scale 0.4s ease-out forwards;
+  }
+}
+
+/* Clerk Component Overrides for Better Visibility */
+.cl-card {
+  background: radial-gradient(circle at top left, rgba(32, 31, 45, 0.98), rgba(8, 8, 16, 0.98)) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.03) !important;
+  color: #f9fafb !important;
+}
+
+.cl-internal-11tkpc3,
+.cl-socialButtonsBlockButton__github .cl-internal-11tkpc3,
+.cl-socialButtonsBlockButton span {
+  color: #f9fafb !important;
+  opacity: 1 !important;
+}
+
+.cl-formFieldLabel,
+.cl-headerTitle,
+.cl-headerSubtitle,
+.cl-dividerText,
+.cl-footerActionText,
+.cl-footerActionLink,
+.cl-identityPreviewText,
+.cl-formButtonPrimary {
+  color: #f9fafb !important;
+}
+
+.cl-formFieldInput {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(212, 175, 55, 0.2) !important;
+  color: #f9fafb !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-width: 1.5px !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0.5rem !important;
+}
+
+.cl-formFieldInput:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(212, 175, 55, 0.4) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15) !important;
+}
+
+.cl-formFieldInput:focus {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: #d4af37 !important;
+  outline: none !important;
+  box-shadow: 
+    0 0 0 3px rgba(212, 175, 55, 0.2),
+    0 4px 16px rgba(212, 175, 55, 0.3) !important;
+  transform: translateY(-2px) scale(1.01) !important;
+}
+
+.cl-formFieldInput::placeholder {
+  color: #a0a0a0 !important;
+  opacity: 1 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.cl-formFieldInput:focus::placeholder {
+  opacity: 0.6 !important;
+}
+
+.cl-socialButtonsBlockButton {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(212, 175, 55, 0.2) !important;
+  color: #f9fafb !important;
+}
+
+.cl-socialButtonsBlockButton:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.cl-formButtonPrimary {
+  background: linear-gradient(135deg, #581120 0%, #800020 100%) !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transform: translateY(0) !important;
+}
+
+.cl-formButtonPrimary::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+  transition: left 0.5s ease !important;
+}
+
+.cl-formButtonPrimary:hover {
+  background: linear-gradient(135deg, #6d1528 0%, #9a0028 100%) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 
+    0 8px 24px rgba(128, 0, 32, 0.4),
+    0 0 0 1px rgba(212, 175, 55, 0.4) !important;
+}
+
+.cl-formButtonPrimary:hover::before {
+  left: 100% !important;
+}
+
+.cl-formButtonPrimary:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+.cl-formButtonPrimary:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Hide Clerk branding */
+.cl-footer,
+.cl-internal-1dauvpw,
+.cl-footerPages {
+  display: none !important;
+}
+
+/* Footer styling if visible */
+.cl-footerAction {
+  background: transparent !important;
+  border-top: 1px solid rgba(212, 175, 55, 0.2) !important;
+  padding-top: 1rem !important;
+}
+
+.cl-footerActionText {
+  color: #a0a0a0 !important;
+}
+
+.cl-footerActionLink {
+  color: #d4af37 !important;
+  text-decoration: none !important;
+}
+
+.cl-footerActionLink:hover {
+  color: #f0c674 !important;
+  text-decoration: underline !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Enhanced Form Field Labels */
+.cl-formFieldLabel {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  font-weight: 500 !important;
+}
+
+.cl-formFieldLabel:hover {
+  color: #d4af37 !important;
+}
+
+/* Enhanced Error Messages */
+.cl-formFieldErrorText {
+  animation: fade-in-scale 0.3s ease-out !important;
+  color: #f87171 !important;
+  font-size: 0.875rem !important;
+  margin-top: 0.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.cl-formFieldErrorText::before {
+  content: '⚠' !important;
+  font-size: 1rem !important;
+}
+
+/* Enhanced Social Buttons */
+.cl-socialButtonsBlockButton {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.cl-socialButtonsBlockButton::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 0 !important;
+  height: 0 !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: translate(-50%, -50%) !important;
+  transition: width 0.6s ease, height 0.6s ease !important;
+}
+
+.cl-socialButtonsBlockButton:hover::after {
+  width: 300px !important;
+  height: 300px !important;
+}
+
+.cl-socialButtonsBlockButton:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2) !important;
+  border-color: rgba(212, 175, 55, 0.5) !important;
+}
+
+.cl-socialButtonsBlockButton:active {
+  transform: translateY(0) !important;
+}
+
+/* Enhanced OTP Code Fields */
+.cl-otpCodeFieldInput {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-width: 1.5px !important;
+}
+
+.cl-otpCodeFieldInput:focus {
+  border-color: #d4af37 !important;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2) !important;
+  transform: scale(1.05) !important;
+}
+
+/* Loading States */
+.cl-formButtonPrimary[data-loading="true"] {
+  position: relative !important;
+  color: transparent !important;
+}
+
+.cl-formButtonPrimary[data-loading="true"]::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 20px !important;
+  height: 20px !important;
+  margin: -10px 0 0 -10px !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-top-color: #fff !important;
+  border-radius: 50% !important;
+  animation: spin 0.8s linear infinite !important;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Alert Messages */
+.cl-alertText {
+  animation: slide-in-left 0.4s ease-out !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0.5rem !important;
+  border-left: 3px solid #d4af37 !important;
+  background: rgba(212, 175, 55, 0.1) !important;
+}
+
+/* Identity Preview */
+.cl-identityPreviewText {
+  transition: color 0.2s ease !important;
+}
+
+.cl-identityPreviewEditButton {
+  transition: all 0.2s ease !important;
+}
+
+.cl-identityPreviewEditButton:hover {
+  transform: scale(1.1) !important;
+}
+
+/* Resend Code Link */
+.cl-formResendCodeLink {
+  transition: all 0.2s ease !important;
+  position: relative !important;
+}
+
+.cl-formResendCodeLink::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 2px !important;
+  background: #d4af37 !important;
+  transition: width 0.3s ease !important;
+}
+
+.cl-formResendCodeLink:hover::after {
+  width: 100% !important;
+}
+
+/* Smooth scroll for form containers */
+.clerk-sign-in-wrapper,
+.clerk-sign-up-wrapper {
+  animation: fadeIn 0.6s ease-out !important;
+}
+
+.clerk-sign-in-wrapper *,
+.clerk-sign-up-wrapper * {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Form Field Container Enhancements */
+.cl-formField {
+  margin-bottom: 1.25rem !important;
+  animation: fade-in-up 0.4s ease-out forwards !important;
+  animation-delay: calc(var(--field-index, 0) * 0.1s) !important;
+}
+
+/* Divider Enhancements */
+.cl-dividerLine {
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent) !important;
+  height: 1px !important;
+}
+
+.cl-dividerText {
+  background: radial-gradient(circle at top left, rgba(32, 31, 45, 0.98), rgba(8, 8, 16, 0.98)) !important;
+  padding: 0 1rem !important;
+}
