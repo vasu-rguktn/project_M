@@ -1,0 +1,24 @@
+{
+  "name": "wine-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "latest",
+    "@tailwindcss/postcss": "^4.1.17",
+    "autoprefixer": "latest",
+    "axios": "latest",
+    "chart.js": "latest",
+    "next": "latest",
+    "postcss": "latest",
+    "react": "latest",
+    "react-chartjs-2": "latest",
+    "react-dom": "latest",
+    "recharts": "^3.6.0",
+    "tailwindcss": "latest"
+  }
+}

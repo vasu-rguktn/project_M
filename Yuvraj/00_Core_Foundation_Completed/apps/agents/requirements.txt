@@ -1,0 +1,17 @@
+# LangGraph and LangChain - Latest versions
+langgraph>=0.2.0
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-mistralai>=0.1.0
+
+# HTTP Client
+httpx>=0.27.0
+
+# Data Validation
+pydantic>=2.0.0
+
+# Environment Variables
+python-dotenv>=1.0.0
+
+# Logging and Utilities
+typing-extensions>=4.8.0
